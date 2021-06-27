@@ -46,7 +46,7 @@ export default {
     '/api':
       environment === 'development'
         ? 'http://localhost'
-        : 'nuxt-lara-app.vercel.app',
+        : 'https://laraveltestapp111.herokuapp.com/',
   },
   /*
    ** Axios module configuration
