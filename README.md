@@ -2,19 +2,27 @@
 
 ## Build Setup
 
-```bash
-# install dependencies
-$ npm install
+vercel へのデプロイ
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+setting の build command で、override のトグルをオンにして
+$ nuxt generate
+と入力。
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+そのほかはそのままで OK。
 
-# generate static project
-$ npm run generate
+pages.index.vue の記述を以下のようにする。
+
+```
+<script>
+export default {
+  async asyncData({ app }) {
+    const data = await app.$axios.$get(
+      `https://laraveltestapp111.herokuapp.com/api` // ←herokuに上げたLaravelのURL + /api と書く。
+    )
+    return { data }
+  },
+}
+</script>
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+ここの URL を間違えると、networkerror というエラー画面になる。

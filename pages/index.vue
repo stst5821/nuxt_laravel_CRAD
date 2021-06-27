@@ -8,9 +8,7 @@
 <script>
 export default {
   async asyncData({ app }) {
-    const data = await app.$axios.$get(
-      `https://laraveltestapp111.herokuapp.com/api`
-    )
+    const data = await app.$axios.$get(`/api`)
     return { data }
   },
 }
