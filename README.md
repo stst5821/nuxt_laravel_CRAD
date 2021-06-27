@@ -26,3 +26,8 @@ export default {
 ```
 
 ここの URL を間違えると、networkerror というエラー画面になる。
+
+開発環境か本番環境かで api のアクセス先を自動で変更する。
+
+cross-env インストール
+npm install --save cross-env
