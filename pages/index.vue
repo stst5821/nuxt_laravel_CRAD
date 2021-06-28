@@ -1,18 +1,28 @@
 <template>
   <div>
-    {{ data }}
+    {{ result }}
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  async asyncData({ app }) {
-    const data = await app.$axios.$get(`/api`)
-    return { data }
+  data() {
+    return {
+      result: '',
+    }
   },
   mounted() {
-    // eslint-disable-next-line no-console
-    console.log(process.env.NODE_ENV)
+    axios
+      .get('http://localhost/test1')
+      .then((response) => {
+        this.result = response.data.result
+      })
+      .catch((error) => {
+        console.log(error)
+        this.result = 'ERROR'
+      })
   },
 }
 </script>

@@ -1,7 +1,5 @@
 # nuxt-lara-app
 
-## Build Setup
-
 vercel へのデプロイ
 
 setting の build command で、override のトグルをオンにして
