@@ -1,6 +1,8 @@
 <template>
   <div>
-    {{ result }}
+    {{ result.id }}
+    {{ result.name }}
+    {{ result.body }}
   </div>
 </template>
 
@@ -18,6 +20,7 @@ export default {
       .get('http://localhost/test1')
       .then((response) => {
         this.result = response.data.result
+        console.log(this.result)
       })
       .catch((error) => {
         console.log(error)
