@@ -13,6 +13,6 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   plugins: [],
-  // add your custom rules here
-  rules: {},
+  // console.logの警告をoffにする。本番にあげるときはこのルールは消す。
+  rules: { 'no-console': 'off' },
 }

@@ -1,8 +1,10 @@
 <template>
   <div>
-    {{ result.id }}
-    {{ result.name }}
-    {{ result.body }}
+    <div v-for="result in results" :key="result.id">
+      {{ result.id }}
+      {{ result.name }}
+      {{ result.body }}
+    </div>
   </div>
 </template>
 
@@ -12,15 +14,15 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      result: '',
+      results: '',
     }
   },
   mounted() {
     axios
       .get('http://localhost/test1')
       .then((response) => {
-        this.result = response.data.result
-        console.log(this.result)
+        this.results = response.data.result
+        console.log(this.results)
       })
       .catch((error) => {
         console.log(error)
