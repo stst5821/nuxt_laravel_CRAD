@@ -13,12 +13,12 @@
       </label>
       <button type="submit" @click="submit">送信</button>
     </form>
-
-    <div v-for="result in results" :key="result.id">
-      {{ result.id }}
-      {{ result.name }}
-      {{ result.body }}
-    </div>
+    <ul>
+      <li v-for="result in results" :key="result.id">
+        id:{{ result.id }} | name:{{ result.name }} | 本文:{{ result.body }}
+        <button @click="remove(result.id)">X</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -46,23 +46,14 @@ export default {
   },
   methods: {
     submit() {
-      // const submitParams = new FormData()
-      // submitParams.append('entry', this.name)
       const CORS_PROXY = 'http://localhost/'
-      const name = this.name
-      console.log(name)
-      axios.post(CORS_PROXY + 'api/store', { name })
+      axios.post(CORS_PROXY + 'api/store', { name: this.name })
+    },
+    remove(id) {
+      const CORS_PROXY = 'http://localhost/'
+      axios.post(CORS_PROXY + 'api/delete', { id })
+      console.log(id)
     },
   },
-  // addData() {
-  //   axios
-  //     .post('http://localhost/store', {
-  //       name: '送る名前',
-  //     })
-  //     .then(function (response) {
-  //       // this.name = response.name
-  //       console.log(response.data)
-  //     })
-  // },
 }
 </script>
