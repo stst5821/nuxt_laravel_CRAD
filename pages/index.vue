@@ -13,8 +13,12 @@
       </label>
       <button type="submit" @click="submit">送信</button>
     </form>
+    <!-- <div>
+      <p>{{ $store.state.results }}</p>
+    </div> -->
     <ul>
       <li v-for="result in results" :key="result.id">
+        <!-- <li v-for="result in $store.state.results" :key="result.id"> -->
         id:{{ result.id }} | name:{{ result.name }} | 本文:{{ result.body }}
         <button @click="remove(result.id)">X</button>
       </li>
@@ -24,6 +28,7 @@
 
 <script>
 import axios from 'axios'
+// import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -45,14 +50,25 @@ export default {
       })
   },
   methods: {
+    // laravelのPostControllerのstoreにデータを送る。
     submit() {
       const CORS_PROXY = 'http://localhost/'
-      axios.post(CORS_PROXY + 'api/store', { name: this.name })
+      // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
+      axios.post(CORS_PROXY + 'api/store', { name: this.name }).then(() => {
+        axios.get(CORS_PROXY + 'api/test1').then((response) => {
+          this.results = response.data.result
+          console.log(this.results)
+        })
+      })
     },
     remove(id) {
       const CORS_PROXY = 'http://localhost/'
-      axios.post(CORS_PROXY + 'api/delete', { id })
-      console.log(id)
+      axios.post(CORS_PROXY + 'api/delete', { id }).then(() => {
+        axios.get(CORS_PROXY + 'api/test1').then((response) => {
+          this.results = response.data.result
+          console.log(this.results)
+        })
+      })
     },
   },
 }
