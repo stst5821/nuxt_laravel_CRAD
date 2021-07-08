@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-for="result in results" :key="result.id">
-      id:{{ result.id }} | name:{{ result.name }} | 本文:{{ result.body }}
-    </div>
+    id:{{ result_id }} | name:{{ result_name }} | 本文:{{ result_body }}
   </div>
 </template>
 
@@ -14,14 +12,9 @@ export default {
     )
     console.log(res)
     return {
-      results: res,
-    }
-  },
-  data() {
-    return {
-      results: '',
-      name: '',
-      body: '',
+      result_id: res.result.id,
+      result_name: res.result.name,
+      result_body: res.result.body,
     }
   },
 }
