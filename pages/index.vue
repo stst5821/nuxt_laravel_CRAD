@@ -54,27 +54,20 @@
 
 <script>
 import axios from 'axios'
-// import { mapState } from 'vuex'
 
 export default {
+  async asyncData(context) {
+    const res = await context.$axios.$get(`http://localhost/api/test1/`)
+    return {
+      results: res.result,
+    }
+  },
   data() {
     return {
       results: '',
       name: '',
       body: '',
     }
-  },
-  mounted() {
-    axios
-      .get('http://localhost/api/test1')
-      .then((response) => {
-        this.results = response.data.result
-        console.log(this.results)
-      })
-      .catch((error) => {
-        console.log(error)
-        this.result = 'ERROR'
-      })
   },
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
@@ -95,7 +88,6 @@ export default {
       axios.post(CORS_PROXY + 'api/delete', { id }).then(() => {
         axios.get(CORS_PROXY + 'api/test1').then((response) => {
           this.results = response.data.result
-          console.log(this.results)
         })
       })
     },
