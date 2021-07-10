@@ -38,9 +38,6 @@
         送信
       </button>
     </form>
-    <!-- <div>
-      <p>{{ $store.state.results }}</p>
-    </div> -->
     <ul>
       <li v-for="result in results" :key="result.id">
         id:
@@ -57,7 +54,9 @@ import axios from 'axios'
 
 export default {
   async asyncData(context) {
-    const res = await context.$axios.$get(`http://localhost/api/test1/`)
+    // const LOCAL = 'http://localhost/'
+    const PROD = 'https://laraveltestapp111.herokuapp.com/'
+    const res = await context.$axios.$get(PROD + `/api/test1/`)
     return {
       results: res.result,
     }
@@ -72,21 +71,23 @@ export default {
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
     submit() {
-      const CORS_PROXY = 'http://localhost/'
+      // const LOCAL = 'http://localhost/'
+      const PROD = 'https://laraveltestapp111.herokuapp.com/'
       // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
       axios
-        .post(CORS_PROXY + 'api/store', { name: this.name, body: this.body })
+        .post(PROD + 'api/store', { name: this.name, body: this.body })
         .then(() => {
-          axios.get(CORS_PROXY + 'api/test1').then((response) => {
+          axios.get(PROD + 'api/test1').then((response) => {
             this.results = response.data.result
             console.log(this.results)
           })
         })
     },
     remove(id) {
-      const CORS_PROXY = 'http://localhost/'
-      axios.post(CORS_PROXY + 'api/delete', { id }).then(() => {
-        axios.get(CORS_PROXY + 'api/test1').then((response) => {
+      // const LOCAL = 'http://localhost/'
+      const PROD = 'https://laraveltestapp111.herokuapp.com/'
+      axios.post(PROD + 'api/delete', { id }).then(() => {
+        axios.get(PROD + 'api/test1').then((response) => {
           this.results = response.data.result
         })
       })

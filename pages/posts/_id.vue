@@ -56,8 +56,10 @@ import axios from 'axios'
 
 export default {
   async asyncData(context) {
+    // const LOCAL = 'http://localhost/'
+    const PROD = 'https://laraveltestapp111.herokuapp.com/'
     const res = await context.$axios.$get(
-      `http://localhost/api/edit/${context.params.id}`
+      PROD + `api/edit/${context.params.id}`
     )
     console.log(res)
     return {
@@ -77,9 +79,10 @@ export default {
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
     submit() {
-      const CORS_PROXY = 'http://localhost/'
+      // const LOCAL = 'http://localhost/'
+      const PROD = 'https://laraveltestapp111.herokuapp.com/'
       // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
-      axios.post(CORS_PROXY + 'api/update', {
+      axios.post(PROD + 'api/update', {
         id: this.result_id,
         name: this.name,
         body: this.body,
