@@ -29,3 +29,8 @@ export default {
 
 cross-env インストール
 npm install --save cross-env
+
+## edit 機能について
+
+index.vue から id の渡し方、\_id.vue での受け取り方について
+https://qiita.com/beanbeenzou/items/b9cbb7333dc4a54f987b
