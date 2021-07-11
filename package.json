@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt",
+    "dev": "nuxt",
     "build": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt build",
     "start": "nuxt start",
     "generate": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt generate",

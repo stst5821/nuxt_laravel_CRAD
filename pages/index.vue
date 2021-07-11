@@ -54,9 +54,7 @@ import axios from 'axios'
 
 export default {
   async asyncData(context) {
-    // const LOCAL = 'http://localhost/'
-    // const PROD = 'https://laraveltestapp111.herokuapp.com/'
-    const res = await context.$axios.$get(process.env.BASE_URL + `api/test1/`)
+    const res = await context.$axios.$get(process.env.baseUrl + `api/test1/`)
     return {
       results: res.result,
     }
@@ -71,35 +69,25 @@ export default {
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
     submit() {
-      // const LOCAL = 'http://localhost/'
-      // const PROD = 'https://laraveltestapp111.herokuapp.com/'
       // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
       axios
-        .post('https://laraveltestapp111.herokuapp.com/api/store', {
+        .post(process.env.baseUrl + `api/store`, {
           name: this.name,
           body: this.body,
         })
         .then(() => {
-          axios
-            .get('https://laraveltestapp111.herokuapp.com/api/test1')
-            .then((response) => {
-              this.results = response.data.result
-              console.log(this.results)
-            })
+          axios.get(process.env.baseUrl + `api/test1`).then((response) => {
+            this.results = response.data.result
+            console.log(this.results)
+          })
         })
     },
     remove(id) {
-      // const LOCAL = 'http://localhost/'
-      // const PROD = 'https://laraveltestapp111.herokuapp.com/'
-      axios
-        .post('https://laraveltestapp111.herokuapp.com/api/delete', { id })
-        .then(() => {
-          axios
-            .get('https://laraveltestapp111.herokuapp.com/api/test1')
-            .then((response) => {
-              this.results = response.data.result
-            })
+      axios.post(process.env.baseUrl + `api/delete`, { id }).then(() => {
+        axios.get(process.env.baseUrl + `api/test1`).then((response) => {
+          this.results = response.data.result
         })
+      })
     },
   },
 }
