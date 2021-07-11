@@ -1,12 +1,16 @@
 # nuxt-lara-app
 
-vercel へのデプロイ
+## vercel へのデプロイ
+
+package.json の scripts の記述を以下に変更。
+"build": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt generate",
 
 setting の build command で、override のトグルをオンにして
-$ nuxt generate
+$ npm run build
 と入力。
 
-そのほかはそのままで OK。
+※vercel の build command に nuxt generate と入力してデプロイすればいいのではと思ったが
+このやり方だとなぜか production 環境ではなく、dev 環境になってしまうため、上記のようにする必要がある。
 
 pages.index.vue の記述を以下のようにする。
 
