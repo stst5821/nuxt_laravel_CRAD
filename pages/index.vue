@@ -56,9 +56,7 @@ export default {
   async asyncData(context) {
     // const LOCAL = 'http://localhost/'
     // const PROD = 'https://laraveltestapp111.herokuapp.com/'
-    const res = await context.$axios.$get(
-      `https://laraveltestapp111.herokuapp.com/api/test1/`
-    )
+    const res = await context.$axios.$get(process.env.BASE_URL + `api/test1/`)
     return {
       results: res.result,
     }
