@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt build",
+    "build": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt generate",
     "start": "nuxt start",
     "generate": "BASE_URL='https://laraveltestapp111.herokuapp.com/' nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
