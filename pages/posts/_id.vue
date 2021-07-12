@@ -57,7 +57,7 @@ import axios from 'axios'
 export default {
   async asyncData(context) {
     const res = await context.$axios.$get(
-      `http://localhost/api/edit/${context.params.id}`
+      process.env.baseUrl + `api/edit/${context.params.id}`
     )
     console.log(res)
     return {
@@ -77,9 +77,8 @@ export default {
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
     submit() {
-      const CORS_PROXY = 'http://localhost/'
       // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
-      axios.post(CORS_PROXY + 'api/update', {
+      axios.post(process.env.baseUrl + 'api/update', {
         id: this.result_id,
         name: this.name,
         body: this.body,

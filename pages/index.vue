@@ -38,9 +38,6 @@
         送信
       </button>
     </form>
-    <!-- <div>
-      <p>{{ $store.state.results }}</p>
-    </div> -->
     <ul>
       <li v-for="result in results" :key="result.id">
         id:
@@ -54,9 +51,14 @@
 
 <script>
 import axios from 'axios'
-// import { mapState } from 'vuex'
 
 export default {
+  async asyncData(context) {
+    const res = await context.$axios.$get(process.env.baseUrl + `api/test1/`)
+    return {
+      results: res.result,
+    }
+  },
   data() {
     return {
       results: '',
@@ -64,38 +66,26 @@ export default {
       body: '',
     }
   },
-  mounted() {
-    axios
-      .get('http://localhost/api/test1')
-      .then((response) => {
-        this.results = response.data.result
-        console.log(this.results)
-      })
-      .catch((error) => {
-        console.log(error)
-        this.result = 'ERROR'
-      })
-  },
   methods: {
     // laravelのPostControllerのstoreにデータを送る。
     submit() {
-      const CORS_PROXY = 'http://localhost/'
       // DBへの登録が完了したら、getでDBからデータを取ってきて追加したデータを画面に表示させる。
       axios
-        .post(CORS_PROXY + 'api/store', { name: this.name, body: this.body })
+        .post(process.env.baseUrl + `api/store`, {
+          name: this.name,
+          body: this.body,
+        })
         .then(() => {
-          axios.get(CORS_PROXY + 'api/test1').then((response) => {
+          axios.get(process.env.baseUrl + `api/test1`).then((response) => {
             this.results = response.data.result
             console.log(this.results)
           })
         })
     },
     remove(id) {
-      const CORS_PROXY = 'http://localhost/'
-      axios.post(CORS_PROXY + 'api/delete', { id }).then(() => {
-        axios.get(CORS_PROXY + 'api/test1').then((response) => {
+      axios.post(process.env.baseUrl + `api/delete`, { id }).then(() => {
+        axios.get(process.env.baseUrl + `api/test1`).then((response) => {
           this.results = response.data.result
-          console.log(this.results)
         })
       })
     },
