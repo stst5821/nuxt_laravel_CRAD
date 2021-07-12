@@ -1,4 +1,8 @@
-# nuxt-lara-app
+## nuxt_laravel_CRAD
+
+front：nuxt
+backend：laravel
+DB:postgreSQL
 
 ## vercel へのデプロイ
 
